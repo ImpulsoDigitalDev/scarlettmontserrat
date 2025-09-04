@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCARLETT MONTSERRAT - Medical Care | Dr. Verónica Urbaez</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        chocolate: {
+                            100: '#F5E6D3',
+                            200: '#E6C2A6',
+                        },
+                        amber: {
+                            100: '#FEF3C7',
+                            200: '#FDE68A',
+                        }
+                    },
+                    fontFamily: {
+                        'dancing': ['Dancing Script', 'cursive'],
+                        'poppins': ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .drip-effect {
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #CD853F 100%);
+            position: relative;
+        }
+        .drip-effect::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #CD853F 100%);
+            clip-path: polygon(0 0, 100% 0, 95% 100%, 85% 80%, 75% 100%, 65% 70%, 55% 100%, 45% 60%, 35% 100%, 25% 80%, 15% 100%, 5% 70%, 0 100%);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(139, 69, 19, 0.2);
+        }
+        
+        .btn-gradient {
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-gradient:hover {
+            background: linear-gradient(135deg, #A0522D 0%, #CD853F 100%);
+            transform: translateY(-2px);
+        }
+        
+        .bounce-animation {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .carousel-slide {
+            display: none;
+        }
+        .carousel-slide.active {
+            display: block;
+        }
+        
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        @media (max-width: 768px) {
+            .carousel-container {
+                border-radius: 0 !important;
+                margin: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body class="font-poppins bg-white">
+    <!-- Header -->
+    <header class="drip-effect text-white sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <span class="text-3xl">🏥</span>
+                    <div>
+                        <h1 class="font-serif text-2xl md:text-3xl font-bold tracking-wider">SCARLETT MONTSERRAT</h1>
+                        <p class="text-sm opacity-90">Medical Care - Dr. Verónica Urbaez</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#inicio" onclick="scrollToSection('inicio')" class="hover:text-amber-200 transition-colors">Inicio</a>
+                    <a href="#servicios" onclick="scrollToSection('servicios')" class="hover:text-amber-200 transition-colors">Servicios</a>
+                    <a href="#contacto" onclick="scrollToSection('contacto')" class="hover:text-amber-200 transition-colors">Contacto</a>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-2xl" onclick="toggleMobileMenu()">
+                    <span id="hamburger">☰</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 h-full w-64 bg-gradient-to-b from-amber-800 to-amber-900 shadow-lg md:hidden">
+            <div class="p-6">
+                <button onclick="toggleMobileMenu()" class="text-white text-2xl mb-8">✕</button>
+                <nav class="space-y-6">
+                    <a href="#inicio" onclick="scrollToSection('inicio'); toggleMobileMenu()" class="block text-white hover:text-amber-200 transition-colors">Inicio</a>
+                    <a href="#servicios" onclick="scrollToSection('servicios'); toggleMobileMenu()" class="block text-white hover:text-amber-200 transition-colors">Servicios</a>
+                    <a href="#contacto" onclick="scrollToSection('contacto'); toggleMobileMenu()" class="block text-white hover:text-amber-200 transition-colors">Contacto</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Carousel -->
+    <section id="inicio" class="py-12 bg-gradient-to-br from-amber-50 to-chocolate-100">
+        <div class="container mx-auto px-4">
+            <div class="carousel-container relative bg-white rounded-lg md:rounded-2xl shadow-2xl overflow-hidden mx-0 md:mx-8">
+                <!-- Slide 1 -->
+                <div class="carousel-slide active">
+                    <div class="flex flex-col md:flex-row items-center min-h-[400px] md:min-h-[500px]">
+                        <div class="w-full md:w-1/2 p-8 md:p-12">
+                            <h2 class="font-dancing text-4xl md:text-6xl text-amber-800 mb-4">Cuidado Médico Profesional</h2>
+                            <p class="text-gray-600 text-lg mb-6">Atención médica de calidad con la Dra. Verónica Urbaez. Tu salud es nuestra prioridad.</p>
+                            <button onclick="openWhatsApp('¡Hola! Me interesa agendar una cita médica.')" class="btn-gradient text-white px-8 py-3 rounded-full font-semibold">
+                                Agendar Cita 📅
+                            </button>
+                        </div>
+                        <div class="w-full md:w-1/2 p-8">
+                            <div class="text-center">
+                                <img id="slide1-img" src="images/carousel-slide1.jpg" alt="Consultorio Médico" class="w-full h-64 md:h-80 object-cover rounded-lg shadow-lg hidden" onerror="this.style.display='none';">
+                                <div id="slide1-emoji" class="text-8xl md:text-9xl">🏥</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 2 -->
+                <div class="carousel-slide">
+                    <div class="flex flex-col md:flex-row items-center min-h-[400px] md:min-h-[500px]">
+                        <div class="w-full md:w-1/2 p-8 md:p-12">
+                            <h2 class="font-dancing text-4xl md:text-6xl text-amber-800 mb-4">Experiencia y Confianza</h2>
+                            <p class="text-gray-600 text-lg mb-6">Años de experiencia brindando atención médica integral con tecnología de vanguardia.</p>
+                            <button onclick="openWhatsApp('Quiero conocer más sobre los servicios médicos disponibles.')" class="btn-gradient text-white px-8 py-3 rounded-full font-semibold">
+                                Conocer Servicios 🩺
+                            </button>
+                        </div>
+                        <div class="w-full md:w-1/2 p-8">
+                            <div class="text-center">
+                                <img id="slide2-img" src="images/carousel-slide2.jpg" alt="Doctora Verónica" class="w-full h-64 md:h-80 object-cover rounded-lg shadow-lg hidden" onerror="this.style.display='none';">
+                                <div id="slide2-emoji" class="text-8xl md:text-9xl">👩‍⚕️</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 3 -->
+                <div class="carousel-slide">
+                    <div class="flex flex-col md:flex-row items-center min-h-[400px] md:min-h-[500px]">
+                        <div class="w-full md:w-1/2 p-8 md:p-12">
+                            <h2 class="font-dancing text-4xl md:text-6xl text-amber-800 mb-4">Horarios Flexibles</h2>
+                            <p class="text-gray-600 text-lg mb-6">Atención todos los días de 8:00 AM a 8:00 PM. Siempre disponibles para tu bienestar.</p>
+                            <button onclick="openWhatsApp('¿Cuáles son los horarios disponibles para citas?')" class="btn-gradient text-white px-8 py-3 rounded-full font-semibold">
+                                Ver Horarios ⏰
+                            </button>
+                        </div>
+                        <div class="w-full md:w-1/2 p-8">
+                            <div class="text-center">
+                                <img id="slide3-img" src="images/carousel-slide3.jpg" alt="Horarios Flexibles" class="w-full h-64 md:h-80 object-cover rounded-lg shadow-lg hidden" onerror="this.style.display='none';">
+                                <div id="slide3-emoji" class="text-8xl md:text-9xl">🕐</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 4 -->
+                <div class="carousel-slide">
+                    <div class="flex flex-col md:flex-row items-center min-h-[400px] md:min-h-[500px]">
+                        <div class="w-full md:w-1/2 p-8 md:p-12">
+                            <h2 class="font-dancing text-4xl md:text-6xl text-amber-800 mb-4">Tecnología Avanzada</h2>
+                            <p class="text-gray-600 text-lg mb-6">Equipos médicos de última generación para diagnósticos precisos y tratamientos efectivos.</p>
+                            <button onclick="openWhatsApp('Me interesa conocer sobre los equipos médicos disponibles.')" class="btn-gradient text-white px-8 py-3 rounded-full font-semibold">
+                                Ver Equipos 🔬
+                            </button>
+                        </div>
+                        <div class="w-full md:w-1/2 p-8">
+                            <div class="text-center">
+                                <img id="slide4-img" src="images/carousel-slide4.jpg" alt="Tecnología Médica" class="w-full h-64 md:h-80 object-cover rounded-lg shadow-lg hidden" onerror="this.style.display='none';">
+                                <div id="slide4-emoji" class="text-8xl md:text-9xl">🔬</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 5 -->
+                <div class="carousel-slide">
+                    <div class="flex flex-col md:flex-row items-center min-h-[400px] md:min-h-[500px]">
+                        <div class="w-full md:w-1/2 p-8 md:p-12">
+                            <h2 class="font-dancing text-4xl md:text-6xl text-amber-800 mb-4">Atención Personalizada</h2>
+                            <p class="text-gray-600 text-lg mb-6">Cada paciente recibe atención individualizada y un plan de tratamiento personalizado.</p>
+                            <button onclick="openWhatsApp('Quiero información sobre consultas personalizadas.')" class="btn-gradient text-white px-8 py-3 rounded-full font-semibold">
+                                Consulta Personal 💝
+                            </button>
+                        </div>
+                        <div class="w-full md:w-1/2 p-8">
+                            <div class="text-center">
+                                <img id="slide5-img" src="images/carousel-slide5.jpg" alt="Atención Personalizada" class="w-full h-64 md:h-80 object-cover rounded-lg shadow-lg hidden" onerror="this.style.display='none';">
+                                <div id="slide5-emoji" class="text-8xl md:text-9xl">💝</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Carousel Controls -->
+                <button onclick="prevSlide()" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-3 shadow-lg transition-all">
+                    <span class="text-amber-800 text-xl">‹</span>
+                </button>
+                <button onclick="nextSlide()" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-3 shadow-lg transition-all">
+                    <span class="text-amber-800 text-xl">›</span>
+                </button>
+                
+                <!-- Carousel Indicators -->
+                <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                    <button onclick="goToSlide(0)" class="carousel-indicator w-3 h-3 rounded-full bg-white bg-opacity-60 hover:bg-opacity-100 transition-all"></button>
+                    <button onclick="goToSlide(1)" class="carousel-indicator w-3 h-3 rounded-full bg-white bg-opacity-60 hover:bg-opacity-100 transition-all"></button>
+                    <button onclick="goToSlide(2)" class="carousel-indicator w-3 h-3 rounded-full bg-white bg-opacity-60 hover:bg-opacity-100 transition-all"></button>
+                    <button onclick="goToSlide(3)" class="carousel-indicator w-3 h-3 rounded-full bg-white bg-opacity-60 hover:bg-opacity-100 transition-all"></button>
+                    <button onclick="goToSlide(4)" class="carousel-indicator w-3 h-3 rounded-full bg-white bg-opacity-60 hover:bg-opacity-100 transition-all"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="py-16 gradient-bg">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="font-dancing text-5xl md:text-6xl text-amber-800 mb-4">Nuestros Servicios</h2>
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto">Ofrecemos una amplia gama de servicios médicos especializados para cuidar tu salud integral</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Service 1 -->
+                <div class="card-hover bg-white rounded-2xl p-6 shadow-lg text-center">
+                    <div class="mb-4">
+                        <img id="service1-img" src="images/consulta-general.jpg" alt="Consulta General" class="w-full h-32 object-cover rounded-lg mb-4 hidden" onerror="this.style.display='none';">
+                        <div id="service1-emoji" class="text-6xl">🩺</div>
+                    </div>
+                    <h3 class="font-semibold text-xl text-amber-800 mb-2">Consulta General</h3>
+                    <p class="text-gray-600 mb-4">Evaluación médica completa y diagnóstico profesional</p>
+                    <button onclick="openWhatsApp('Quiero agendar una consulta general.')" class="btn-gradient text-white px-6 py-2 rounded-full text-sm font-semibold w-full">
+                        Agendar
+                    </button>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="card-hover bg-white rounded-2xl p-6 shadow-lg text-center">
+                    <div class="mb-4">
+                        <img id="service2-img" src="images/cardiologia.jpg" alt="Cardiología" class="w-full h-32 object-cover rounded-lg mb-4 hidden" onerror="this.style.display='none';">
+                        <div id="service2-emoji" class="text-6xl">❤️</div>
+                    </div>
+                    <h3 class="font-semibold text-xl text-amber-800 mb-2">Cardiología</h3>
+                    <p class="text-gray-600 mb-4">Cuidado especializado del corazón y sistema cardiovascular</p>
+                    <button onclick="openWhatsApp('Me interesa una consulta de cardiología.')" class="btn-gradient text-white px-6 py-2 rounded-full text-sm font-semibold w-full">
+                        Agendar
+                    </button>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="card-hover bg-white rounded-2xl p-6 shadow-lg text-center">
+                    <div class="mb-4">
+                        <img id="service3-img" src="images/laboratorio.jpg" alt="Laboratorio" class="w-full h-32 object-cover rounded-lg mb-4 hidden" onerror="this.style.display='none';">
+                        <div id="service3-emoji" class="text-6xl">🧪</div>
+                    </div>
+                    <h3 class="font-semibold text-xl text-amber-800 mb-2">Laboratorio</h3>
+                    <p class="text-gray-600 mb-4">Análisis clínicos y estudios de laboratorio completos</p>
+                    <button onclick="openWhatsApp('Necesito información sobre estudios de laboratorio.')" class="btn-gradient text-white px-6 py-2 rounded-full text-sm font-semibold w-full">
+                        Consultar
+                    </button>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="card-hover bg-white rounded-2xl p-6 shadow-lg text-center">
+                    <div class="mb-4">
+                        <img id="service4-img" src="images/pediatria.jpg" alt="Pediatría" class="w-full h-32 object-cover rounded-lg mb-4 hidden" onerror="this.style.display='none';">
+                        <div id="service4-emoji" class="text-6xl">👶</div>
+                    </div>
+                    <h3 class="font-semibold text-xl text-amber-800 mb-2">Pediatría</h3>
+                    <p class="text-gray-600 mb-4">Atención médica especializada para niños y adolescentes</p>
+                    <button onclick="openWhatsApp('Quiero agendar una cita de pediatría.')" class="btn-gradient text-white px-6 py-2 rounded-full text-sm font-semibold w-full">
+                        Agendar
+                    </button>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="card-hover bg-white rounded-2xl p-6 shadow-lg text-center">
+                    <div class="mb-4">
+                        <img id="service5-img" src="images/ginecologia.jpg" alt="Ginecología" class="w-full h-32 object-cover rounded-lg mb-4 hidden" onerror="this.style.display='none';">
+                        <div id="service5-emoji" class="text-6xl">🌸</div>
+                    </div>
+                    <h3 class="font-semibold text-xl text-amber-800 mb-2">Ginecología</h3>
+                    <p class="text-gray-600 mb-4">Salud femenina integral y cuidado ginecológico</p>
+                    <button onclick="openWhatsApp('Me interesa una consulta ginecológica.')" class="btn-gradient text-white px-6 py-2 rounded-full text-sm font-semibold w-full">
+                        Agendar
+                    </button>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="card-hover bg-white rounded-2xl p-6 shadow-lg text-center">
+                    <div class="mb-4">
+                        <img id="service6-img" src="images/dermatologia.jpg" alt="Dermatología" class="w-full h-32 object-cover rounded-lg mb-4 hidden" onerror="this.style.display='none';">
+                        <div id="service6-emoji" class="text-6xl">✨</div>
+                    </div>
+                    <h3 class="font-semibold text-xl text-amber-800 mb-2">Dermatología</h3>
+                    <p class="text-gray-600 mb-4">Cuidado de la piel y tratamientos dermatológicos</p>
+                    <button onclick="openWhatsApp('Quiero una consulta dermatológica.')" class="btn-gradient text-white px-6 py-2 rounded-full text-sm font-semibold w-full">
+                        Agendar
+                    </button>
+                </div>
+                
+                <!-- Service 7 -->
+                <div class="card-hover bg-white rounded-2xl p-6 shadow-lg text-center">
+                    <div class="mb-4">
+                        <img id="service7-img" src="images/emergencias.jpg" alt="Emergencias" class="w-full h-32 object-cover rounded-lg mb-4 hidden" onerror="this.style.display='none';">
+                        <div id="service7-emoji" class="text-6xl">🚨</div>
+                    </div>
+                    <h3 class="font-semibold text-xl text-amber-800 mb-2">Emergencias</h3>
+                    <p class="text-gray-600 mb-4">Atención médica de urgencia las 24 horas</p>
+                    <button onclick="openWhatsApp('¡EMERGENCIA! Necesito atención médica urgente.')" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-full text-sm font-semibold w-full transition-all">
+                        Emergencia
+                    </button>
+                </div>
+                
+                <!-- Service 8 -->
+                <div class="card-hover bg-white rounded-2xl p-6 shadow-lg text-center">
+                    <div class="mb-4">
+                        <img id="service8-img" src="images/medicina-preventiva.jpg" alt="Medicina Preventiva" class="w-full h-32 object-cover rounded-lg mb-4 hidden" onerror="this.style.display='none';">
+                        <div id="service8-emoji" class="text-6xl">🛡️</div>
+                    </div>
+                    <h3 class="font-semibold text-xl text-amber-800 mb-2">Medicina Preventiva</h3>
+                    <p class="text-gray-600 mb-4">Chequeos regulares y prevención de enfermedades</p>
+                    <button onclick="openWhatsApp('Quiero información sobre medicina preventiva.')" class="btn-gradient text-white px-6 py-2 rounded-full text-sm font-semibold w-full">
+                        Consultar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="font-dancing text-5xl md:text-6xl text-amber-800 mb-4">Contacto</h2>
+                <p class="text-gray-600 text-lg">Estamos aquí para cuidar tu salud. Contáctanos para agendar tu cita</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div class="space-y-8">
+                    <div class="bg-gradient-to-r from-amber-50 to-chocolate-100 rounded-2xl p-8">
+                        <h3 class="font-dancing text-3xl text-amber-800 mb-6">Información de Contacto</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4">
+                                <span class="text-2xl">📱</span>
+                                <div>
+                                    <p class="font-semibold text-amber-800">WhatsApp</p>
+                                    <p class="text-gray-600">+1 (868) 743-9664</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-4">
+                                <span class="text-2xl">📍</span>
+                                <div>
+                                    <p class="font-semibold text-amber-800">Ubicación</p>
+                                    <p class="text-gray-600">Venezuela</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-4">
+                                <span class="text-2xl">🕐</span>
+                                <div>
+                                    <p class="font-semibold text-amber-800">Horarios</p>
+                                    <p class="text-gray-600">Lun - Dom: 8:00 AM - 8:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Action Buttons -->
+                        <div class="mt-8 space-y-3">
+                            <button onclick="openWhatsApp('¡Hola! Quiero agendar una cita médica.')" class="w-full btn-gradient text-white py-3 rounded-full font-semibold text-lg">
+                                📅 Agendar Cita por WhatsApp
+                            </button>
+                            <button onclick="openWhatsApp('Necesito información sobre los servicios médicos.')" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-full font-semibold transition-all">
+                                💬 Consultar Servicios
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="bg-gradient-to-br from-amber-50 to-chocolate-100 rounded-2xl p-8">
+                    <h3 class="font-dancing text-3xl text-amber-800 mb-6">Solicitar Información</h3>
+                    
+                    <form id="contactForm" class="space-y-4">
+                        <div>
+                            <label class="block text-amber-800 font-semibold mb-2">Nombre Completo</label>
+                            <input type="text" id="nombre" class="w-full px-4 py-3 rounded-lg border border-amber-200 focus:border-amber-500 focus:outline-none" placeholder="Tu nombre completo" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-amber-800 font-semibold mb-2">Teléfono</label>
+                            <input type="tel" id="telefono" class="w-full px-4 py-3 rounded-lg border border-amber-200 focus:border-amber-500 focus:outline-none" placeholder="Tu número de teléfono" required>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-amber-800 font-semibold mb-2">Servicio de Interés</label>
+                            <select id="servicio" class="w-full px-4 py-3 rounded-lg border border-amber-200 focus:border-amber-500 focus:outline-none" required>
+                                <option value="">Selecciona un servicio</option>
+                                <option value="Consulta General">Consulta General</option>
+                                <option value="Cardiología">Cardiología</option>
+                                <option value="Laboratorio">Laboratorio</option>
+                                <option value="Pediatría">Pediatría</option>
+                                <option value="Ginecología">Ginecología</option>
+                                <option value="Dermatología">Dermatología</option>
+                                <option value="Emergencias">Emergencias</option>
+                                <option value="Medicina Preventiva">Medicina Preventiva</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-amber-800 font-semibold mb-2">Mensaje</label>
+                            <textarea id="mensaje" rows="4" class="w-full px-4 py-3 rounded-lg border border-amber-200 focus:border-amber-500 focus:outline-none" placeholder="Describe tu consulta o necesidad médica"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full btn-gradient text-white py-4 rounded-lg font-semibold text-lg">
+                            📱 Enviar por WhatsApp
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="drip-effect text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Logo and Description -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <span class="text-3xl">🏥</span>
+                        <div>
+                            <h3 class="font-serif text-2xl font-bold tracking-wider">SCARLETT MONTSERRAT</h3>
+                            <p class="text-sm opacity-90">Medical Care</p>
+                        </div>
+                    </div>
+                    <p class="text-amber-100 mb-4">Cuidando tu salud con profesionalismo, experiencia y tecnología de vanguardia. La Dra. Verónica Urbaez y su equipo están comprometidos con tu bienestar.</p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-semibold text-xl mb-4">Enlaces Rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#inicio" onclick="scrollToSection('inicio')" class="text-amber-100 hover:text-white transition-colors">Inicio</a></li>
+                        <li><a href="#servicios" onclick="scrollToSection('servicios')" class="text-amber-100 hover:text-white transition-colors">Servicios</a></li>
+                        <li><a href="#contacto" onclick="scrollToSection('contacto')" class="text-amber-100 hover:text-white transition-colors">Contacto</a></li>
+                        <li><button onclick="openWhatsApp('¡Hola! Quiero agendar una cita médica.')" class="text-amber-100 hover:text-white transition-colors">Agendar Cita</button></li>
+                    </ul>
+                </div>
+                
+                <!-- Social Media -->
+                <div>
+                    <h4 class="font-semibold text-xl mb-4">Síguenos</h4>
+                    <div class="flex space-x-4">
+                        <a href="https://wa.me/18687439664" target="_blank" class="bg-green-600 hover:bg-green-700 p-3 rounded-full transition-all">
+                            <span class="text-xl">📱</span>
+                        </a>
+                        <a href="#" class="bg-pink-600 hover:bg-pink-700 p-3 rounded-full transition-all">
+                            <span class="text-xl">📷</span>
+                        </a>
+                        <a href="#" class="bg-blue-600 hover:bg-blue-700 p-3 rounded-full transition-all">
+                            <span class="text-xl">📘</span>
+                        </a>
+                        <a href="#" class="bg-black hover:bg-gray-800 p-3 rounded-full transition-all">
+                            <span class="text-xl">🎵</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-amber-200 border-opacity-30 mt-8 pt-8 text-center">
+                <p class="text-amber-100">&copy; 2025 SCARLETT MONTSERRAT Medical Care. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <!-- Mobile: Direct WhatsApp Button -->
+        <div id="mobileChat" class="md:hidden">
+            <button onclick="openWhatsApp('¡Hola! Necesito información médica.')" class="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg bounce-animation">
+                <span class="text-2xl">💬</span>
+            </button>
+        </div>
+        
+        <!-- Desktop: Chat Widget -->
+        <div id="desktopChat" class="hidden md:block">
+            <div id="chatButton" onclick="toggleChat()" class="bg-amber-600 hover:bg-amber-700 text-white p-4 rounded-full shadow-lg cursor-pointer bounce-animation">
+                <span class="text-2xl">💬</span>
+            </div>
+            
+            <div id="chatWidget" class="hidden absolute bottom-16 right-0 bg-white rounded-2xl shadow-2xl w-80 overflow-hidden">
+                <div class="bg-gradient-to-r from-amber-600 to-amber-700 text-white p-4">
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-semibold">¿En qué podemos ayudarte?</h4>
+                        <button onclick="toggleChat()" class="text-white hover:text-amber-200">✕</button>
+                    </div>
+                </div>
+                
+                <div class="p-4 space-y-3">
+                    <button onclick="openWhatsApp('¡Hola! Quiero agendar una cita médica.')" class="w-full text-left p-3 bg-amber-50 hover:bg-amber-100 rounded-lg transition-all">
+                        📅 Agendar una cita
+                    </button>
+                    <button onclick="openWhatsApp('¿Cuáles son los servicios médicos disponibles?')" class="w-full text-left p-3 bg-amber-50 hover:bg-amber-100 rounded-lg transition-all">
+                        🩺 Consultar servicios
+                    </button>
+                    <button onclick="openWhatsApp('¿Cuáles son los horarios de atención?')" class="w-full text-left p-3 bg-amber-50 hover:bg-amber-100 rounded-lg transition-all">
+                        🕐 Ver horarios
+                    </button>
+                    <button onclick="openWhatsApp('¡EMERGENCIA! Necesito atención médica urgente.')" class="w-full text-left p-3 bg-red-50 hover:bg-red-100 text-red-700 rounded-lg transition-all">
+                        🚨 Emergencia médica
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Image Loading System
+        function loadImages() {
+            const images = [
+                'slide1-img', 'slide2-img', 'slide3-img', 'slide4-img', 'slide5-img',
+                'service1-img', 'service2-img', 'service3-img', 'service4-img', 
+                'service5-img', 'service6-img', 'service7-img', 'service8-img'
+            ];
+            
+            images.forEach(id => {
+                const img = document.getElementById(id);
+                const emoji = document.getElementById(id.replace('-img', '-emoji'));
+                
+                if (img && emoji) {
+                    img.onload = function() {
+                        console.log(`✅ Imagen cargada: ${id}`);
+                        this.classList.remove('hidden');
+                        emoji.style.display = 'none';
+                    };
+                    
+                    img.onerror = function() {
+                        console.log(`❌ Imagen no encontrada: ${id}, mostrando emoji`);
+                        this.style.display = 'none';
+                        emoji.style.display = 'block';
+                    };
+                }
+            });
+        }
+
+        // Carousel Functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const indicators = document.querySelectorAll('.carousel-indicator');
+        let autoPlayInterval;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            
+            indicators.forEach((indicator, i) => {
+                indicator.classList.toggle('bg-opacity-100', i === index);
+                indicator.classList.toggle('bg-opacity-60', i !== index);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            showSlide(currentSlide);
+            resetAutoPlay();
+        }
+
+        function startAutoPlay() {
+            autoPlayInterval = setInterval(nextSlide, 5000);
+        }
+
+        function resetAutoPlay() {
+            clearInterval(autoPlayInterval);
+            startAutoPlay();
+        }
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.getElementById('hamburger');
+            
+            if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
+                menu.classList.remove('active');
+            }
+        });
+
+        // Smooth Scrolling
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // WhatsApp Integration
+        function openWhatsApp(message) {
+            const phoneNumber = '18687439664';
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            window.open(whatsappURL, '_blank');
+        }
+
+        // Chat Widget (Desktop)
+        function toggleChat() {
+            const widget = document.getElementById('chatWidget');
+            widget.classList.toggle('hidden');
+        }
+
+        // Contact Form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value;
+            const telefono = document.getElementById('telefono').value;
+            const servicio = document.getElementById('servicio').value;
+            const mensaje = document.getElementById('mensaje').value;
+            
+            const whatsappMessage = `¡Hola! Soy ${nombre}
+📱 Teléfono: ${telefono}
+🩺 Servicio: ${servicio}
+💬 Mensaje: ${mensaje}
+
+Me gustaría agendar una cita o recibir más información.`;
+            
+            openWhatsApp(whatsappMessage);
+        });
+
+        // Device Detection
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadImages();
+            showSlide(0);
+            startAutoPlay();
+            
+            // Show appropriate chat widget
+            if (isMobile()) {
+                document.getElementById('mobileChat').classList.remove('md:hidden');
+                document.getElementById('desktopChat').classList.add('hidden');
+            } else {
+                document.getElementById('mobileChat').classList.add('hidden');
+                document.getElementById('desktopChat').classList.remove('hidden');
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (isMobile()) {
+                document.getElementById('mobileChat').classList.remove('hidden');
+                document.getElementById('desktopChat').classList.add('hidden');
+            } else {
+                document.getElementById('mobileChat').classList.add('hidden');
+                document.getElementById('desktopChat').classList.remove('hidden');
+            }
+        });
+
+        // Pause autoplay when user interacts with carousel
+        document.querySelector('.carousel-container').addEventListener('mouseenter', function() {
+            clearInterval(autoPlayInterval);
+        });
+
+        document.querySelector('.carousel-container').addEventListener('mouseleave', function() {
+            startAutoPlay();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979e8dadd7641364',t:'MTc1NzAwMDA5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
