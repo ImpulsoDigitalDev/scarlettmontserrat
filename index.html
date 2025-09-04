@@ -185,6 +185,8 @@
         .mobile-menu {
             transform: translateX(100%);
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, #0369a1 0%, #0c4a6e 100%) !important;
+            z-index: 9999 !important;
         }
         
         .mobile-menu.active {
@@ -238,18 +240,65 @@
         </div>
         
         <!-- Mobile Menu -->
-        <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 h-full w-80 medical-gradient shadow-2xl md:hidden">
-            <div class="p-8">
-                <button onclick="toggleMobileMenu()" class="text-white text-3xl mb-12 float-right">✕</button>
-                <div class="clear-both"></div>
-                <nav class="space-y-8">
-                    <button onclick="showPage('home'); toggleMobileMenu()" class="block text-white text-xl hover:text-gold-300 transition-colors">Inicio</button>
-                    <button onclick="showPage('services'); toggleMobileMenu()" class="block text-white text-xl hover:text-gold-300 transition-colors">Servicios</button>
-                    <button onclick="showPage('contact'); toggleMobileMenu()" class="block text-white text-xl hover:text-gold-300 transition-colors">Contacto</button>
-                    <button onclick="openWhatsApp('¡Hola! Quiero agendar una cita médica.'); toggleMobileMenu()" class="block w-full gold-gradient text-white py-4 rounded-full font-semibold text-lg mt-8">
-                        📱 Agendar Cita
+        <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 h-full w-80 shadow-2xl md:hidden">
+            <div class="p-6">
+                <!-- Header -->
+                <div class="flex justify-between items-center mb-8 pb-4 border-b border-white border-opacity-20">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                            <span class="text-xl">🏥</span>
+                        </div>
+                        <div>
+                            <h3 class="text-white font-bold text-lg">SCARLETT</h3>
+                            <p class="text-blue-200 text-xs">Medical Center</p>
+                        </div>
+                    </div>
+                    <button onclick="toggleMobileMenu()" class="text-white hover:text-gold-300 text-3xl transition-colors">✕</button>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="space-y-4 mb-8">
+                    <button onclick="showPage('home'); toggleMobileMenu()" class="flex items-center space-x-4 w-full text-left p-4 text-white hover:bg-white hover:bg-opacity-10 rounded-2xl transition-all duration-300">
+                        <span class="text-2xl">🏠</span>
+                        <span class="text-lg font-medium">Inicio</span>
+                    </button>
+                    <button onclick="showPage('services'); toggleMobileMenu()" class="flex items-center space-x-4 w-full text-left p-4 text-white hover:bg-white hover:bg-opacity-10 rounded-2xl transition-all duration-300">
+                        <span class="text-2xl">🩺</span>
+                        <span class="text-lg font-medium">Servicios</span>
+                    </button>
+                    <button onclick="showPage('contact'); toggleMobileMenu()" class="flex items-center space-x-4 w-full text-left p-4 text-white hover:bg-white hover:bg-opacity-10 rounded-2xl transition-all duration-300">
+                        <span class="text-2xl">📞</span>
+                        <span class="text-lg font-medium">Contacto</span>
                     </button>
                 </nav>
+                
+                <!-- Quick Actions -->
+                <div class="space-y-3 mb-8">
+                    <button onclick="openWhatsApp('¡Hola! Quiero agendar una cita médica.'); toggleMobileMenu()" class="w-full bg-gradient-to-r from-gold-400 to-gold-600 text-white py-4 px-6 rounded-2xl font-semibold text-lg shadow-lg">
+                        📱 Agendar Cita
+                    </button>
+                    <button onclick="openWhatsApp('¡EMERGENCIA! Necesito atención médica urgente.'); toggleMobileMenu()" class="w-full bg-gradient-to-r from-red-500 to-red-600 text-white py-3 px-6 rounded-2xl font-semibold">
+                        🚨 Emergencia
+                    </button>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="border-t border-white border-opacity-20 pt-6">
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3 text-blue-200">
+                            <span class="text-lg">📱</span>
+                            <span class="text-sm">+1 (868) 743-9664</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-blue-200">
+                            <span class="text-lg">🕐</span>
+                            <span class="text-sm">Lun-Dom: 8AM-8PM</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-blue-200">
+                            <span class="text-lg">👩‍⚕️</span>
+                            <span class="text-sm">Dra. Verónica Urbaez</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -1239,5 +1288,5 @@ Solicitud enviada desde SCARLETT MONTSERRAT Medical Center`;
             observer.observe(el);
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979e99eb9007ecc9',t:'MTc1NzAwMDU5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979efefbc4c9b3e9',t:'MTc1NzAwNDczMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
