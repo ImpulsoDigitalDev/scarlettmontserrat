@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCARLETT MONTSERRAT - Advanced Medical Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medical: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        gold: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        }
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'playfair': ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'scale-in': 'scaleIn 0.6s ease-out',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .medical-gradient {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 50%, #0c4a6e 100%);
+        }
+        
+        .gold-gradient {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230ea5e9' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .page {
+            display: none;
+            min-height: 100vh;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 25px 50px rgba(14, 165, 233, 0.2);
+        }
+        
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .floating-element:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 20%; right: 10%; animation-delay: 2s; }
+        .floating-element:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 4s; }
+        .floating-element:nth-child(4) { bottom: 10%; right: 20%; animation-delay: 6s; }
+        
+        .contact-form {
+            background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .stats-counter {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0ea5e9, #0369a1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .testimonial-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        .chat-bubble {
+            animation: pulse-slow 2s infinite;
+        }
+        
+        .medical-icon {
+            filter: drop-shadow(0 4px 8px rgba(14, 165, 233, 0.3));
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50 overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-effect">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 medical-gradient rounded-full flex items-center justify-center">
+                        <span class="text-white text-2xl">🏥</span>
+                    </div>
+                    <div>
+                        <h1 class="font-playfair text-xl md:text-2xl font-bold text-gray-800">SCARLETT MONTSERRAT</h1>
+                        <p class="text-xs text-gray-600">Advanced Medical Center</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8">
+                    <button onclick="showPage('home')" class="nav-link active text-gray-700 hover:text-medical-600 font-medium">Inicio</button>
+                    <button onclick="showPage('services')" class="nav-link text-gray-700 hover:text-medical-600 font-medium">Servicios</button>
+                    <button onclick="showPage('contact')" class="nav-link text-gray-700 hover:text-medical-600 font-medium">Contacto</button>
+                </div>
+                
+                <!-- CTA Button -->
+                <div class="hidden md:block">
+                    <button onclick="openWhatsApp('¡Hola! Quiero agendar una cita médica.')" class="medical-gradient text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300">
+                        📱 Agendar Cita
+                    </button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-2xl text-gray-700" onclick="toggleMobileMenu()">
+                    <span id="hamburger">☰</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 h-full w-80 medical-gradient shadow-2xl md:hidden">
+            <div class="p-8">
+                <button onclick="toggleMobileMenu()" class="text-white text-3xl mb-12 float-right">✕</button>
+                <div class="clear-both"></div>
+                <nav class="space-y-8">
+                    <button onclick="showPage('home'); toggleMobileMenu()" class="block text-white text-xl hover:text-gold-300 transition-colors">Inicio</button>
+                    <button onclick="showPage('services'); toggleMobileMenu()" class="block text-white text-xl hover:text-gold-300 transition-colors">Servicios</button>
+                    <button onclick="showPage('contact'); toggleMobileMenu()" class="block text-white text-xl hover:text-gold-300 transition-colors">Contacto</button>
+                    <button onclick="openWhatsApp('¡Hola! Quiero agendar una cita médica.'); toggleMobileMenu()" class="block w-full gold-gradient text-white py-4 rounded-full font-semibold text-lg mt-8">
+                        📱 Agendar Cita
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <section class="hero-bg pt-24 pb-16 relative">
+            <div class="floating-elements">
+                <div class="floating-element text-6xl text-medical-300">🩺</div>
+                <div class="floating-element text-5xl text-medical-300">❤️</div>
+                <div class="floating-element text-4xl text-medical-300">🔬</div>
+                <div class="floating-element text-5xl text-medical-300">💊</div>
+            </div>
+            
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+                    <!-- Content -->
+                    <div class="animate-fade-in">
+                        <h1 class="font-playfair text-5xl md:text-7xl font-bold text-gray-800 mb-6 leading-tight">
+                            Medicina de
+                            <span class="bg-gradient-to-r from-medical-500 to-medical-700 bg-clip-text text-transparent">
+                                Vanguardia
+                            </span>
+                        </h1>
+                        <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                            Experiencia médica excepcional con la Dra. Verónica Urbaez. 
+                            Tecnología avanzada, atención personalizada y resultados extraordinarios.
+                        </p>
+                        
+                        <!-- Stats -->
+                        <div class="grid grid-cols-3 gap-6 mb-8">
+                            <div class="text-center">
+                                <div class="stats-counter" id="counter1">0</div>
+                                <p class="text-gray-600 font-medium">Años de Experiencia</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="stats-counter" id="counter2">0</div>
+                                <p class="text-gray-600 font-medium">Pacientes Atendidos</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="stats-counter" id="counter3">0</div>
+                                <p class="text-gray-600 font-medium">Especialidades</p>
+                            </div>
+                        </div>
+                        
+                        <!-- CTA Buttons -->
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="openWhatsApp('¡Hola! Quiero agendar una consulta médica.')" class="medical-gradient text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                                📅 Agendar Consulta
+                            </button>
+                            <button onclick="showPage('services')" class="border-2 border-medical-500 text-medical-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-medical-50 transition-all duration-300">
+                                🩺 Ver Servicios
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Hero Image/Visual -->
+                    <div class="animate-scale-in">
+                        <div class="relative">
+                            <div class="w-full h-96 md:h-[500px] bg-gradient-to-br from-medical-100 to-medical-200 rounded-3xl shadow-2xl flex items-center justify-center relative overflow-hidden">
+                                <img id="hero-img" src="images/hero-doctor.jpg" alt="Dra. Verónica Urbaez" class="w-full h-full object-cover rounded-3xl hidden" onerror="this.style.display='none';">
+                                <div id="hero-visual" class="text-center">
+                                    <div class="text-8xl md:text-9xl mb-4 animate-float medical-icon">👩‍⚕️</div>
+                                    <h3 class="font-playfair text-2xl font-bold text-medical-700">Dra. Verónica Urbaez</h3>
+                                    <p class="text-medical-600">Medicina Integral</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Floating Cards -->
+                            <div class="absolute -top-6 -right-6 glass-effect rounded-2xl p-4 animate-float">
+                                <div class="text-3xl mb-2">⭐</div>
+                                <p class="text-sm font-semibold text-gray-700">Excelencia</p>
+                                <p class="text-xs text-gray-600">Médica</p>
+                            </div>
+                            
+                            <div class="absolute -bottom-6 -left-6 glass-effect rounded-2xl p-4 animate-float" style="animation-delay: 2s;">
+                                <div class="text-3xl mb-2">🏆</div>
+                                <p class="text-sm font-semibold text-gray-700">Certificada</p>
+                                <p class="text-xs text-gray-600">Internacionalmente</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Preview -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 animate-slide-up">
+                    <h2 class="font-playfair text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                        Servicios <span class="text-medical-600">Especializados</span>
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                        Ofrecemos una gama completa de servicios médicos con tecnología de vanguardia 
+                        y atención personalizada para cada paciente.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Service Cards -->
+                    <div class="service-card bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl">
+                        <div class="w-16 h-16 medical-gradient rounded-2xl flex items-center justify-center mb-6">
+                            <span class="text-3xl">🩺</span>
+                        </div>
+                        <h3 class="font-playfair text-xl font-bold text-gray-800 mb-4">Consulta General</h3>
+                        <p class="text-gray-600 mb-6">Evaluación médica integral con diagnóstico preciso y plan de tratamiento personalizado.</p>
+                        <button onclick="openWhatsApp('Quiero información sobre consulta general.')" class="text-medical-600 font-semibold hover:text-medical-700 transition-colors">
+                            Más información →
+                        </button>
+                    </div>
+                    
+                    <div class="service-card bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl">
+                        <div class="w-16 h-16 medical-gradient rounded-2xl flex items-center justify-center mb-6">
+                            <span class="text-3xl">❤️</span>
+                        </div>
+                        <h3 class="font-playfair text-xl font-bold text-gray-800 mb-4">Cardiología</h3>
+                        <p class="text-gray-600 mb-6">Cuidado especializado del corazón con equipos de última generación.</p>
+                        <button onclick="openWhatsApp('Me interesa la consulta de cardiología.')" class="text-medical-600 font-semibold hover:text-medical-700 transition-colors">
+                            Más información →
+                        </button>
+                    </div>
+                    
+                    <div class="service-card bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl">
+                        <div class="w-16 h-16 medical-gradient rounded-2xl flex items-center justify-center mb-6">
+                            <span class="text-3xl">🔬</span>
+                        </div>
+                        <h3 class="font-playfair text-xl font-bold text-gray-800 mb-4">Laboratorio</h3>
+                        <p class="text-gray-600 mb-6">Análisis clínicos completos con resultados rápidos y precisos.</p>
+                        <button onclick="openWhatsApp('Necesito información sobre estudios de laboratorio.')" class="text-medical-600 font-semibold hover:text-medical-700 transition-colors">
+                            Más información →
+                        </button>
+                    </div>
+                    
+                    <div class="service-card bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl">
+                        <div class="w-16 h-16 medical-gradient rounded-2xl flex items-center justify-center mb-6">
+                            <span class="text-3xl">🚨</span>
+                        </div>
+                        <h3 class="font-playfair text-xl font-bold text-gray-800 mb-4">Emergencias</h3>
+                        <p class="text-gray-600 mb-6">Atención médica de urgencia disponible las 24 horas del día.</p>
+                        <button onclick="openWhatsApp('¡EMERGENCIA! Necesito atención médica urgente.')" class="text-red-600 font-semibold hover:text-red-700 transition-colors">
+                            Emergencia →
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <button onclick="showPage('services')" class="medical-gradient text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all duration-300">
+                        Ver Todos los Servicios
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="py-20 hero-bg">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="font-playfair text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                        Lo que Dicen Nuestros <span class="text-medical-600">Pacientes</span>
+                    </h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="testimonial-card rounded-3xl p-8 shadow-lg">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-gradient-to-r from-gold-400 to-gold-600 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-white font-bold">M</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">María González</h4>
+                                <div class="flex text-gold-400">⭐⭐⭐⭐⭐</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 italic">"Excelente atención médica. La Dra. Urbaez es muy profesional y el consultorio cuenta con tecnología de primera."</p>
+                    </div>
+                    
+                    <div class="testimonial-card rounded-3xl p-8 shadow-lg">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-gradient-to-r from-gold-400 to-gold-600 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-white font-bold">C</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Carlos Rodríguez</h4>
+                                <div class="flex text-gold-400">⭐⭐⭐⭐⭐</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 italic">"El mejor consultorio médico de la zona. Atención personalizada y resultados excepcionales."</p>
+                    </div>
+                    
+                    <div class="testimonial-card rounded-3xl p-8 shadow-lg">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 bg-gradient-to-r from-gold-400 to-gold-600 rounded-full flex items-center justify-center mr-4">
+                                <span class="text-white font-bold">A</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Ana Martínez</h4>
+                                <div class="flex text-gold-400">⭐⭐⭐⭐⭐</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 italic">"Muy recomendado. La doctora es muy dedicada y el servicio es impecable."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- SERVICES PAGE -->
+    <div id="services" class="page">
+        <section class="pt-24 pb-20 hero-bg">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 animate-fade-in">
+                    <h1 class="font-playfair text-5xl md:text-6xl font-bold text-gray-800 mb-6">
+                        Servicios <span class="text-medical-600">Médicos</span>
+                    </h1>
+                    <p class="text-xl text-gray-600 max-w-4xl mx-auto">
+                        Ofrecemos una amplia gama de servicios médicos especializados con tecnología de vanguardia, 
+                        atención personalizada y los más altos estándares de calidad médica.
+                    </p>
+                </div>
+                
+                <!-- Services Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Service 1 -->
+                    <div class="service-card bg-white rounded-3xl p-8 shadow-lg">
+                        <div class="w-20 h-20 medical-gradient rounded-3xl flex items-center justify-center mb-6">
+                            <img id="service1-img" src="images/consulta-general.jpg" alt="Consulta General" class="w-full h-full object-cover rounded-3xl hidden" onerror="this.style.display='none';">
+                            <span id="service1-icon" class="text-4xl">🩺</span>
+                        </div>
+                        <h3 class="font-playfair text-2xl font-bold text-gray-800 mb-4">Consulta General</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Evaluación médica integral con historia clínica completa, examen físico detallado 
+                            y plan de tratamiento personalizado para cada paciente.
+                        </p>
+                        <ul class="text-sm text-gray-600 mb-6 space-y-2">
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Historia clínica completa</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Examen físico detallado</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Diagnóstico preciso</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Plan de tratamiento</li>
+                        </ul>
+                        <button onclick="openWhatsApp('Quiero agendar una consulta general.')" class="w-full medical-gradient text-white py-3 rounded-full font-semibold hover:shadow-lg transition-all">
+                            Agendar Consulta
+                        </button>
+                    </div>
+                    
+                    <!-- Service 2 -->
+                    <div class="service-card bg-white rounded-3xl p-8 shadow-lg">
+                        <div class="w-20 h-20 medical-gradient rounded-3xl flex items-center justify-center mb-6">
+                            <img id="service2-img" src="images/cardiologia.jpg" alt="Cardiología" class="w-full h-full object-cover rounded-3xl hidden" onerror="this.style.display='none';">
+                            <span id="service2-icon" class="text-4xl">❤️</span>
+                        </div>
+                        <h3 class="font-playfair text-2xl font-bold text-gray-800 mb-4">Cardiología</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Especialidad médica dedicada al diagnóstico y tratamiento de enfermedades del corazón 
+                            y sistema cardiovascular con equipos de última generación.
+                        </p>
+                        <ul class="text-sm text-gray-600 mb-6 space-y-2">
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Electrocardiograma</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Ecocardiograma</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Holter 24 horas</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Pruebas de esfuerzo</li>
+                        </ul>
+                        <button onclick="openWhatsApp('Me interesa una consulta de cardiología.')" class="w-full medical-gradient text-white py-3 rounded-full font-semibold hover:shadow-lg transition-all">
+                            Agendar Consulta
+                        </button>
+                    </div>
+                    
+                    <!-- Service 3 -->
+                    <div class="service-card bg-white rounded-3xl p-8 shadow-lg">
+                        <div class="w-20 h-20 medical-gradient rounded-3xl flex items-center justify-center mb-6">
+                            <img id="service3-img" src="images/laboratorio.jpg" alt="Laboratorio" class="w-full h-full object-cover rounded-3xl hidden" onerror="this.style.display='none';">
+                            <span id="service3-icon" class="text-4xl">🧪</span>
+                        </div>
+                        <h3 class="font-playfair text-2xl font-bold text-gray-800 mb-4">Laboratorio Clínico</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Análisis clínicos completos con tecnología automatizada para resultados rápidos, 
+                            precisos y confiables en el diagnóstico médico.
+                        </p>
+                        <ul class="text-sm text-gray-600 mb-6 space-y-2">
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Química sanguínea</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Hematología completa</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Uroanálisis</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Perfil hormonal</li>
+                        </ul>
+                        <button onclick="openWhatsApp('Necesito información sobre estudios de laboratorio.')" class="w-full medical-gradient text-white py-3 rounded-full font-semibold hover:shadow-lg transition-all">
+                            Consultar Estudios
+                        </button>
+                    </div>
+                    
+                    <!-- Service 4 -->
+                    <div class="service-card bg-white rounded-3xl p-8 shadow-lg">
+                        <div class="w-20 h-20 medical-gradient rounded-3xl flex items-center justify-center mb-6">
+                            <img id="service4-img" src="images/pediatria.jpg" alt="Pediatría" class="w-full h-full object-cover rounded-3xl hidden" onerror="this.style.display='none';">
+                            <span id="service4-icon" class="text-4xl">👶</span>
+                        </div>
+                        <h3 class="font-playfair text-2xl font-bold text-gray-800 mb-4">Pediatría</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Atención médica especializada para niños desde el nacimiento hasta la adolescencia, 
+                            con enfoque en prevención, diagnóstico y tratamiento.
+                        </p>
+                        <ul class="text-sm text-gray-600 mb-6 space-y-2">
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Control de crecimiento</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Vacunación completa</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Consulta de urgencias</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Orientación nutricional</li>
+                        </ul>
+                        <button onclick="openWhatsApp('Quiero agendar una cita de pediatría.')" class="w-full medical-gradient text-white py-3 rounded-full font-semibold hover:shadow-lg transition-all">
+                            Agendar Consulta
+                        </button>
+                    </div>
+                    
+                    <!-- Service 5 -->
+                    <div class="service-card bg-white rounded-3xl p-8 shadow-lg">
+                        <div class="w-20 h-20 medical-gradient rounded-3xl flex items-center justify-center mb-6">
+                            <img id="service5-img" src="images/ginecologia.jpg" alt="Ginecología" class="w-full h-full object-cover rounded-3xl hidden" onerror="this.style.display='none';">
+                            <span id="service5-icon" class="text-4xl">🌸</span>
+                        </div>
+                        <h3 class="font-playfair text-2xl font-bold text-gray-800 mb-4">Ginecología</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Cuidado integral de la salud femenina con atención especializada en todas las etapas 
+                            de la vida de la mujer, desde la adolescencia hasta la menopausia.
+                        </p>
+                        <ul class="text-sm text-gray-600 mb-6 space-y-2">
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Consulta ginecológica</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Citología cervical</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Ecografía pélvica</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Planificación familiar</li>
+                        </ul>
+                        <button onclick="openWhatsApp('Me interesa una consulta ginecológica.')" class="w-full medical-gradient text-white py-3 rounded-full font-semibold hover:shadow-lg transition-all">
+                            Agendar Consulta
+                        </button>
+                    </div>
+                    
+                    <!-- Service 6 -->
+                    <div class="service-card bg-white rounded-3xl p-8 shadow-lg">
+                        <div class="w-20 h-20 medical-gradient rounded-3xl flex items-center justify-center mb-6">
+                            <img id="service6-img" src="images/dermatologia.jpg" alt="Dermatología" class="w-full h-full object-cover rounded-3xl hidden" onerror="this.style.display='none';">
+                            <span id="service6-icon" class="text-4xl">✨</span>
+                        </div>
+                        <h3 class="font-playfair text-2xl font-bold text-gray-800 mb-4">Dermatología</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Diagnóstico y tratamiento de enfermedades de la piel, cabello y uñas, 
+                            incluyendo dermatología estética y preventiva.
+                        </p>
+                        <ul class="text-sm text-gray-600 mb-6 space-y-2">
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Consulta dermatológica</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Dermatoscopía</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Tratamiento de acné</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Dermatología estética</li>
+                        </ul>
+                        <button onclick="openWhatsApp('Quiero una consulta dermatológica.')" class="w-full medical-gradient text-white py-3 rounded-full font-semibold hover:shadow-lg transition-all">
+                            Agendar Consulta
+                        </button>
+                    </div>
+                    
+                    <!-- Service 7 -->
+                    <div class="service-card bg-white rounded-3xl p-8 shadow-lg">
+                        <div class="w-20 h-20 bg-gradient-to-r from-red-500 to-red-600 rounded-3xl flex items-center justify-center mb-6">
+                            <img id="service7-img" src="images/emergencias.jpg" alt="Emergencias" class="w-full h-full object-cover rounded-3xl hidden" onerror="this.style.display='none';">
+                            <span id="service7-icon" class="text-4xl text-white">🚨</span>
+                        </div>
+                        <h3 class="font-playfair text-2xl font-bold text-gray-800 mb-4">Emergencias Médicas</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Atención médica de urgencia disponible las 24 horas del día, los 7 días de la semana, 
+                            con personal especializado y equipos de emergencia.
+                        </p>
+                        <ul class="text-sm text-gray-600 mb-6 space-y-2">
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Atención 24/7</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Estabilización de pacientes</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Reanimación cardiopulmonar</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Traslado de emergencia</li>
+                        </ul>
+                        <button onclick="openWhatsApp('¡EMERGENCIA! Necesito atención médica urgente.')" class="w-full bg-gradient-to-r from-red-500 to-red-600 text-white py-3 rounded-full font-semibold hover:shadow-lg transition-all">
+                            🚨 Emergencia
+                        </button>
+                    </div>
+                    
+                    <!-- Service 8 -->
+                    <div class="service-card bg-white rounded-3xl p-8 shadow-lg">
+                        <div class="w-20 h-20 medical-gradient rounded-3xl flex items-center justify-center mb-6">
+                            <img id="service8-img" src="images/medicina-preventiva.jpg" alt="Medicina Preventiva" class="w-full h-full object-cover rounded-3xl hidden" onerror="this.style.display='none';">
+                            <span id="service8-icon" class="text-4xl">🛡️</span>
+                        </div>
+                        <h3 class="font-playfair text-2xl font-bold text-gray-800 mb-4">Medicina Preventiva</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Programas de prevención y detección temprana de enfermedades mediante chequeos regulares, 
+                            vacunación y educación para la salud.
+                        </p>
+                        <ul class="text-sm text-gray-600 mb-6 space-y-2">
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Chequeos anuales</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Vacunación completa</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Detección temprana</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Educación en salud</li>
+                        </ul>
+                        <button onclick="openWhatsApp('Quiero información sobre medicina preventiva.')" class="w-full medical-gradient text-white py-3 rounded-full font-semibold hover:shadow-lg transition-all">
+                            Consultar Programa
+                        </button>
+                    </div>
+                    
+                    <!-- Service 9 -->
+                    <div class="service-card bg-white rounded-3xl p-8 shadow-lg">
+                        <div class="w-20 h-20 medical-gradient rounded-3xl flex items-center justify-center mb-6">
+                            <img id="service9-img" src="images/telemedicina.jpg" alt="Telemedicina" class="w-full h-full object-cover rounded-3xl hidden" onerror="this.style.display='none';">
+                            <span id="service9-icon" class="text-4xl">💻</span>
+                        </div>
+                        <h3 class="font-playfair text-2xl font-bold text-gray-800 mb-4">Telemedicina</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Consultas médicas virtuales desde la comodidad de tu hogar, con la misma calidad 
+                            y profesionalismo de una consulta presencial.
+                        </p>
+                        <ul class="text-sm text-gray-600 mb-6 space-y-2">
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Consulta virtual</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Seguimiento de tratamientos</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Recetas digitales</li>
+                            <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Disponibilidad flexible</li>
+                        </ul>
+                        <button onclick="openWhatsApp('Me interesa una consulta por telemedicina.')" class="w-full medical-gradient text-white py-3 rounded-full font-semibold hover:shadow-lg transition-all">
+                            Agendar Virtual
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div id="contact" class="page">
+        <section class="pt-24 pb-20 hero-bg">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 animate-fade-in">
+                    <h1 class="font-playfair text-5xl md:text-6xl font-bold text-gray-800 mb-6">
+                        <span class="text-medical-600">Contacto</span>
+                    </h1>
+                    <p class="text-xl text-gray-600 max-w-4xl mx-auto">
+                        Estamos aquí para cuidar tu salud. Contáctanos para agendar tu cita o resolver cualquier duda. 
+                        Nuestro equipo médico está disponible para brindarte la mejor atención.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                    <!-- Contact Information -->
+                    <div class="animate-slide-up">
+                        <div class="bg-white rounded-3xl p-8 shadow-2xl mb-8">
+                            <h2 class="font-playfair text-3xl font-bold text-gray-800 mb-8">Información de Contacto</h2>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-12 h-12 medical-gradient rounded-2xl flex items-center justify-center flex-shrink-0">
+                                        <span class="text-white text-xl">📱</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800 text-lg mb-1">WhatsApp</h3>
+                                        <p class="text-gray-600">+1 (868) 743-9664</p>
+                                        <p class="text-sm text-gray-500">Disponible 24/7 para emergencias</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-12 h-12 medical-gradient rounded-2xl flex items-center justify-center flex-shrink-0">
+                                        <span class="text-white text-xl">📍</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800 text-lg mb-1">Ubicación</h3>
+                                        <p class="text-gray-600">Venezuela</p>
+                                        <p class="text-sm text-gray-500">Consultorio médico moderno y equipado</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-12 h-12 medical-gradient rounded-2xl flex items-center justify-center flex-shrink-0">
+                                        <span class="text-white text-xl">🕐</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800 text-lg mb-1">Horarios de Atención</h3>
+                                        <p class="text-gray-600">Lunes - Domingo</p>
+                                        <p class="text-gray-600">8:00 AM - 8:00 PM</p>
+                                        <p class="text-sm text-gray-500">Emergencias: 24 horas</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-4">
+                                    <div class="w-12 h-12 medical-gradient rounded-2xl flex items-center justify-center flex-shrink-0">
+                                        <span class="text-white text-xl">👩‍⚕️</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800 text-lg mb-1">Doctora</h3>
+                                        <p class="text-gray-600">Dra. Verónica Urbaez</p>
+                                        <p class="text-sm text-gray-500">Medicina General e Integral</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quick Actions -->
+                        <div class="bg-white rounded-3xl p-8 shadow-2xl">
+                            <h3 class="font-playfair text-2xl font-bold text-gray-800 mb-6">Acciones Rápidas</h3>
+                            <div class="space-y-4">
+                                <button onclick="openWhatsApp('¡Hola! Quiero agendar una cita médica urgente.')" class="w-full medical-gradient text-white py-4 rounded-2xl font-semibold text-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                                    📅 Agendar Cita Inmediata
+                                </button>
+                                <button onclick="openWhatsApp('Necesito información sobre los servicios médicos disponibles.')" class="w-full border-2 border-medical-500 text-medical-600 py-4 rounded-2xl font-semibold text-lg hover:bg-medical-50 transition-all duration-300">
+                                    🩺 Consultar Servicios
+                                </button>
+                                <button onclick="openWhatsApp('¿Cuáles son los costos de las consultas médicas?')" class="w-full border-2 border-gold-500 text-gold-600 py-4 rounded-2xl font-semibold text-lg hover:bg-gold-50 transition-all duration-300">
+                                    💰 Consultar Precios
+                                </button>
+                                <button onclick="openWhatsApp('¡EMERGENCIA! Necesito atención médica urgente ahora.')" class="w-full bg-gradient-to-r from-red-500 to-red-600 text-white py-4 rounded-2xl font-semibold text-lg hover:shadow-xl transition-all duration-300 animate-pulse">
+                                    🚨 EMERGENCIA MÉDICA
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Form -->
+                    <div class="animate-scale-in">
+                        <div class="contact-form rounded-3xl p-8 shadow-2xl">
+                            <h2 class="font-playfair text-3xl font-bold text-gray-800 mb-8">Solicitar Información</h2>
+                            
+                            <form id="contactForm" class="space-y-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-gray-700 font-semibold mb-3">Nombre Completo *</label>
+                                        <input type="text" id="nombre" class="w-full px-4 py-4 rounded-2xl border-2 border-gray-200 focus:border-medical-500 focus:outline-none transition-colors" placeholder="Tu nombre completo" required>
+                                    </div>
+                                    <div>
+                                        <label class="block text-gray-700 font-semibold mb-3">Teléfono *</label>
+                                        <input type="tel" id="telefono" class="w-full px-4 py-4 rounded-2xl border-2 border-gray-200 focus:border-medical-500 focus:outline-none transition-colors" placeholder="Tu número de teléfono" required>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-3">Email</label>
+                                    <input type="email" id="email" class="w-full px-4 py-4 rounded-2xl border-2 border-gray-200 focus:border-medical-500 focus:outline-none transition-colors" placeholder="tu@email.com">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-3">Servicio de Interés *</label>
+                                    <select id="servicio" class="w-full px-4 py-4 rounded-2xl border-2 border-gray-200 focus:border-medical-500 focus:outline-none transition-colors" required>
+                                        <option value="">Selecciona un servicio</option>
+                                        <option value="Consulta General">Consulta General</option>
+                                        <option value="Cardiología">Cardiología</option>
+                                        <option value="Laboratorio Clínico">Laboratorio Clínico</option>
+                                        <option value="Pediatría">Pediatría</option>
+                                        <option value="Ginecología">Ginecología</option>
+                                        <option value="Dermatología">Dermatología</option>
+                                        <option value="Emergencias">Emergencias Médicas</option>
+                                        <option value="Medicina Preventiva">Medicina Preventiva</option>
+                                        <option value="Telemedicina">Telemedicina</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-3">Tipo de Consulta</label>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <label class="flex items-center space-x-2 cursor-pointer">
+                                            <input type="radio" name="tipo_consulta" value="Primera vez" class="text-medical-500">
+                                            <span class="text-gray-700">Primera vez</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 cursor-pointer">
+                                            <input type="radio" name="tipo_consulta" value="Control" class="text-medical-500">
+                                            <span class="text-gray-700">Control</span>
+                                        </label>
+                                        <label class="flex items-center space-x-2 cursor-pointer">
+                                            <input type="radio" name="tipo_consulta" value="Urgente" class="text-medical-500">
+                                            <span class="text-gray-700">Urgente</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-3">Fecha Preferida</label>
+                                    <input type="date" id="fecha" class="w-full px-4 py-4 rounded-2xl border-2 border-gray-200 focus:border-medical-500 focus:outline-none transition-colors">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-3">Mensaje</label>
+                                    <textarea id="mensaje" rows="4" class="w-full px-4 py-4 rounded-2xl border-2 border-gray-200 focus:border-medical-500 focus:outline-none transition-colors resize-none" placeholder="Describe tu consulta, síntomas o cualquier información relevante..."></textarea>
+                                </div>
+                                
+                                <div class="flex items-start space-x-3">
+                                    <input type="checkbox" id="terminos" class="mt-1 text-medical-500" required>
+                                    <label for="terminos" class="text-sm text-gray-600">
+                                        Acepto que mis datos sean utilizados para contactarme y brindarme información médica. 
+                                        La información será tratada de forma confidencial según las normas médicas.
+                                    </label>
+                                </div>
+                                
+                                <button type="submit" class="w-full medical-gradient text-white py-4 rounded-2xl font-semibold text-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                                    📱 Enviar Solicitud por WhatsApp
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional Info -->
+                <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-3xl p-8 shadow-lg text-center">
+                        <div class="w-16 h-16 medical-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-3xl">⚡</span>
+                        </div>
+                        <h3 class="font-playfair text-xl font-bold text-gray-800 mb-2">Respuesta Rápida</h3>
+                        <p class="text-gray-600">Respondemos en menos de 15 minutos durante horario de atención</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-3xl p-8 shadow-lg text-center">
+                        <div class="w-16 h-16 medical-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-3xl">🔒</span>
+                        </div>
+                        <h3 class="font-playfair text-xl font-bold text-gray-800 mb-2">Confidencialidad</h3>
+                        <p class="text-gray-600">Toda la información médica es tratada con absoluta confidencialidad</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-3xl p-8 shadow-lg text-center">
+                        <div class="w-16 h-16 medical-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-3xl">🏆</span>
+                        </div>
+                        <h3 class="font-playfair text-xl font-bold text-gray-800 mb-2">Excelencia Médica</h3>
+                        <p class="text-gray-600">Atención médica de la más alta calidad con tecnología avanzada</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Chat Widget -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <!-- Mobile: Direct WhatsApp -->
+        <div id="mobileChat" class="md:hidden">
+            <button onclick="openWhatsApp('¡Hola! Necesito información médica.')" class="chat-bubble bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110">
+                <span class="text-3xl">💬</span>
+            </button>
+        </div>
+        
+        <!-- Desktop: Advanced Chat Widget -->
+        <div id="desktopChat" class="hidden md:block">
+            <div id="chatButton" onclick="toggleChat()" class="chat-bubble medical-gradient text-white p-4 rounded-full shadow-2xl cursor-pointer transition-all duration-300 transform hover:scale-110">
+                <span class="text-3xl">💬</span>
+            </div>
+            
+            <div id="chatWidget" class="hidden absolute bottom-20 right-0 bg-white rounded-3xl shadow-2xl w-96 overflow-hidden border border-gray-200">
+                <div class="medical-gradient text-white p-6">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h4 class="font-bold text-lg">SCARLETT MONTSERRAT</h4>
+                            <p class="text-sm opacity-90">¿En qué podemos ayudarte?</p>
+                        </div>
+                        <button onclick="toggleChat()" class="text-white hover:text-gray-200 text-2xl">✕</button>
+                    </div>
+                </div>
+                
+                <div class="p-6 space-y-4 max-h-80 overflow-y-auto">
+                    <button onclick="openWhatsApp('¡Hola! Quiero agendar una cita médica.')" class="w-full text-left p-4 bg-medical-50 hover:bg-medical-100 rounded-2xl transition-all duration-300 transform hover:scale-105">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">📅</span>
+                            <div>
+                                <p class="font-semibold text-gray-800">Agendar Cita</p>
+                                <p class="text-sm text-gray-600">Reserva tu consulta médica</p>
+                            </div>
+                        </div>
+                    </button>
+                    
+                    <button onclick="openWhatsApp('¿Cuáles son los servicios médicos disponibles?')" class="w-full text-left p-4 bg-medical-50 hover:bg-medical-100 rounded-2xl transition-all duration-300 transform hover:scale-105">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">🩺</span>
+                            <div>
+                                <p class="font-semibold text-gray-800">Servicios Médicos</p>
+                                <p class="text-sm text-gray-600">Conoce nuestras especialidades</p>
+                            </div>
+                        </div>
+                    </button>
+                    
+                    <button onclick="openWhatsApp('¿Cuáles son los horarios de atención?')" class="w-full text-left p-4 bg-medical-50 hover:bg-medical-100 rounded-2xl transition-all duration-300 transform hover:scale-105">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">🕐</span>
+                            <div>
+                                <p class="font-semibold text-gray-800">Horarios</p>
+                                <p class="text-sm text-gray-600">Consulta disponibilidad</p>
+                            </div>
+                        </div>
+                    </button>
+                    
+                    <button onclick="openWhatsApp('¡EMERGENCIA! Necesito atención médica urgente.')" class="w-full text-left p-4 bg-red-50 hover:bg-red-100 text-red-700 rounded-2xl transition-all duration-300 transform hover:scale-105">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">🚨</span>
+                            <div>
+                                <p class="font-semibold">Emergencia Médica</p>
+                                <p class="text-sm">Atención inmediata 24/7</p>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                
+                <div class="p-4 bg-gray-50 border-t">
+                    <p class="text-xs text-gray-500 text-center">
+                        Respuesta promedio: 5 minutos
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="medical-gradient text-white py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Logo and Description -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                            <span class="text-2xl">🏥</span>
+                        </div>
+                        <div>
+                            <h3 class="font-playfair text-2xl font-bold">SCARLETT MONTSERRAT</h3>
+                            <p class="text-sm opacity-90">Advanced Medical Center</p>
+                        </div>
+                    </div>
+                    <p class="text-blue-100 mb-6 leading-relaxed">
+                        Cuidando tu salud con profesionalismo, experiencia y tecnología de vanguardia. 
+                        La Dra. Verónica Urbaez y su equipo están comprometidos con tu bienestar y 
+                        ofrecen atención médica de la más alta calidad.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="https://wa.me/18687439664" target="_blank" class="bg-green-600 hover:bg-green-700 p-3 rounded-full transition-all duration-300 transform hover:scale-110">
+                            <span class="text-xl">📱</span>
+                        </a>
+                        <a href="#" class="bg-pink-600 hover:bg-pink-700 p-3 rounded-full transition-all duration-300 transform hover:scale-110">
+                            <span class="text-xl">📷</span>
+                        </a>
+                        <a href="#" class="bg-blue-600 hover:bg-blue-700 p-3 rounded-full transition-all duration-300 transform hover:scale-110">
+                            <span class="text-xl">📘</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-bold text-xl mb-6">Enlaces Rápidos</h4>
+                    <ul class="space-y-3">
+                        <li><button onclick="showPage('home')" class="text-blue-100 hover:text-white transition-colors">Inicio</button></li>
+                        <li><button onclick="showPage('services')" class="text-blue-100 hover:text-white transition-colors">Servicios</button></li>
+                        <li><button onclick="showPage('contact')" class="text-blue-100 hover:text-white transition-colors">Contacto</button></li>
+                        <li><button onclick="openWhatsApp('¡Hola! Quiero agendar una cita médica.')" class="text-blue-100 hover:text-white transition-colors">Agendar Cita</button></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="font-bold text-xl mb-6">Contacto</h4>
+                    <div class="space-y-3">
+                        <p class="text-blue-100">📱 +1 (868) 743-9664</p>
+                        <p class="text-blue-100">📍 Venezuela</p>
+                        <p class="text-blue-100">🕐 Lun-Dom: 8AM-8PM</p>
+                        <p class="text-blue-100">🚨 Emergencias: 24/7</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-blue-400 border-opacity-30 mt-12 pt-8 text-center">
+                <p class="text-blue-100">&copy; 2025 SCARLETT MONTSERRAT Advanced Medical Center. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Page Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Add active class to current nav link
+            const navLinks = document.querySelectorAll('.nav-link');
+            if (pageId === 'home') navLinks[0].classList.add('active');
+            if (pageId === 'services') navLinks[1].classList.add('active');
+            if (pageId === 'contact') navLinks[2].classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Initialize page-specific features
+            if (pageId === 'home') {
+                startCounters();
+            }
+        }
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('mobileMenu');
+            const hamburger = document.getElementById('hamburger');
+            
+            if (!menu.contains(event.target) && !hamburger.contains(event.target)) {
+                menu.classList.remove('active');
+            }
+        });
+
+        // WhatsApp Integration
+        function openWhatsApp(message) {
+            const phoneNumber = '18687439664';
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            window.open(whatsappURL, '_blank');
+        }
+
+        // Chat Widget
+        function toggleChat() {
+            const widget = document.getElementById('chatWidget');
+            widget.classList.toggle('hidden');
+        }
+
+        // Close chat when clicking outside
+        document.addEventListener('click', function(event) {
+            const chatWidget = document.getElementById('chatWidget');
+            const chatButton = document.getElementById('chatButton');
+            
+            if (chatWidget && chatButton && !chatWidget.contains(event.target) && !chatButton.contains(event.target)) {
+                chatWidget.classList.add('hidden');
+            }
+        });
+
+        // Counter Animation
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            
+            function updateCounter() {
+                start += increment;
+                if (start < target) {
+                    element.textContent = Math.floor(start);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target;
+                }
+            }
+            
+            updateCounter();
+        }
+
+        function startCounters() {
+            const counter1 = document.getElementById('counter1');
+            const counter2 = document.getElementById('counter2');
+            const counter3 = document.getElementById('counter3');
+            
+            if (counter1 && counter1.textContent === '0') {
+                animateCounter(counter1, 15);
+                animateCounter(counter2, 5000);
+                animateCounter(counter3, 9);
+            }
+        }
+
+        // Contact Form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value;
+            const telefono = document.getElementById('telefono').value;
+            const email = document.getElementById('email').value;
+            const servicio = document.getElementById('servicio').value;
+            const tipoConsulta = document.querySelector('input[name="tipo_consulta"]:checked')?.value || 'No especificado';
+            const fecha = document.getElementById('fecha').value;
+            const mensaje = document.getElementById('mensaje').value;
+            
+            const whatsappMessage = `🏥 *SOLICITUD DE CITA MÉDICA*
+            
+👤 *Paciente:* ${nombre}
+📱 *Teléfono:* ${telefono}
+${email ? `📧 *Email:* ${email}` : ''}
+🩺 *Servicio:* ${servicio}
+📋 *Tipo:* ${tipoConsulta}
+${fecha ? `📅 *Fecha preferida:* ${fecha}` : ''}
+
+💬 *Mensaje:*
+${mensaje || 'Sin mensaje adicional'}
+
+---
+Solicitud enviada desde SCARLETT MONTSERRAT Medical Center`;
+            
+            openWhatsApp(whatsappMessage);
+        });
+
+        // Image Loading System
+        function loadImages() {
+            const images = [
+                'hero-img', 'service1-img', 'service2-img', 'service3-img', 'service4-img', 
+                'service5-img', 'service6-img', 'service7-img', 'service8-img', 'service9-img'
+            ];
+            
+            images.forEach(id => {
+                const img = document.getElementById(id);
+                const icon = document.getElementById(id.replace('-img', '-icon'));
+                
+                if (img && icon) {
+                    img.onload = function() {
+                        this.classList.remove('hidden');
+                        icon.style.display = 'none';
+                    };
+                    
+                    img.onerror = function() {
+                        this.style.display = 'none';
+                        icon.style.display = 'block';
+                    };
+                }
+            });
+        }
+
+        // Device Detection
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadImages();
+            startCounters();
+            
+            // Show appropriate chat widget
+            if (isMobile()) {
+                document.getElementById('mobileChat').classList.remove('md:hidden');
+                document.getElementById('desktopChat').classList.add('hidden');
+            } else {
+                document.getElementById('mobileChat').classList.add('hidden');
+                document.getElementById('desktopChat').classList.remove('hidden');
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (isMobile()) {
+                document.getElementById('mobileChat').classList.remove('hidden');
+                document.getElementById('desktopChat').classList.add('hidden');
+            } else {
+                document.getElementById('mobileChat').classList.add('hidden');
+                document.getElementById('desktopChat').classList.remove('hidden');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.animate-slide-up, .animate-fade-in, .animate-scale-in').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.8s ease-out';
+            observer.observe(el);
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'979e99eb9007ecc9',t:'MTc1NzAwMDU5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
